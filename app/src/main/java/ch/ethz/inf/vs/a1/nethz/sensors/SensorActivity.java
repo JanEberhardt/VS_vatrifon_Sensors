@@ -1,18 +1,27 @@
 package ch.ethz.inf.vs.a1.nethz.sensors;
 
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class SensorActivity extends AppCompatActivity {
+public class SensorActivity extends AppCompatActivity implements SensorEventListener {
 
     private Sensor sensor;
+    private SensorManager sensorManager;
+    private ListView valuesList;
+    private SensorViewData[] svd;
+    private ArrayAdapter<SensorViewData> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +29,23 @@ public class SensorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sensor);
 
         int sensorType = (int) getIntent().getSerializableExtra("sensorType");
+        Log.d("###", "sensorType: "+sensorType);
 
-        SensorManager sm = (SensorManager) this.getSystemService(SENSOR_SERVICE);
-        List<Sensor> sensors = sm.getSensorList(sensorType);
+        sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+        List<Sensor> sensors = sensorManager.getSensorList(sensorType);
         this.sensor = sensors.get(0);
 
         TextView title = (TextView) findViewById(R.id.sensorTitle);
         title.setText(sensor.getName());
-        //TODO: print the rest of the data (again in a listView)
+
+        valuesList = (ListView) findViewById(R.id.sensorValues);
+
+        SensorViewDataBuilder builder = new SensorViewDataBuilder();
+        this.svd = builder.getSensorViewDatas(sensorType);
+
+        adapter = new SensorAdapter(this, R.layout.sensor_detail_row, svd);
+
+        valuesList.setAdapter(adapter);
     }
 
     @Override
@@ -50,5 +68,32 @@ public class SensorActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        for (int i = 0; i < svd.length; i++) {
+            svd[i].value = event.values[i];
+        }
+        adapter.notifyDataSetChanged();
+        Log.d("###", "data has changed");
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
     }
 }
