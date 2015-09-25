@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         SensorManager sm = (SensorManager) this.getSystemService(SENSOR_SERVICE);
         sensors = sm.getSensorList(Sensor.TYPE_ALL);
         Iterator iterator = sensors.iterator();
-        List<SensorWrapper> sensorWrappers = new LinkedList<SensorWrapper>();
+        List<SensorWrapper> sensorWrappers = new LinkedList<>();
 
 
         // create the wrapper objects
@@ -54,12 +54,8 @@ public class MainActivity extends AppCompatActivity {
                                     long arg3){
                 Intent i = new Intent(getApplicationContext(), SensorActivity.class);
                 SensorWrapper temp = (SensorWrapper) adapter.getItemAtPosition(position);
-                /**
-                 *  TODO: is there a better way to pass the sensor to the next activity than
-                        passing just it's type and getting the sensor in the new activity again
-                        via another sensor-manager?
-                 */
                 i.putExtra("sensorType", temp.s.getType());
+                i.putExtra("hashCode", temp.s.hashCode());
                 startActivity(i);
             }
 

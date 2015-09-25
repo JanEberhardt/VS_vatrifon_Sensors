@@ -6,12 +6,12 @@ package ch.ethz.inf.vs.a1.nethz.sensors;
  * Object of this type holds one measured value including the name and unit.
  */
 
-public class SensorViewData {
+public class SensorData {
     public String name;
     public float value;
     public String unit;
 
-    public SensorViewData(String n, float v, String u) {
+    public SensorData(String n, float v, String u) {
         this.name = n;
         this.value = v;
         this.unit = u;

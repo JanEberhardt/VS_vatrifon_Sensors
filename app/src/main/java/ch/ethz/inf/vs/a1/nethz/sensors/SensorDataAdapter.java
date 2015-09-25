@@ -12,20 +12,20 @@ import android.widget.TextView;
 /**
  * Created by jan on 25.09.15.
  * <p/>
- * Custom ArrayAdapter for our SensorViewData array.
+ * Custom ArrayAdapter for our SensorData array.
  * Simply adds all the important things (name, value, until) per
  * measured value by the sensor to the listView (row-wise)
  * <p/>
  * Could easily be extended to also display other stuff, e.g: a description of
  * what that sensors value means.
  */
-public class SensorAdapter extends ArrayAdapter<SensorViewData> {
+public class SensorDataAdapter extends ArrayAdapter<SensorData> {
 
     private int layoutResourceId;
     private Context context;
-    private SensorViewData[] data;
+    private SensorData[] data;
 
-    public SensorAdapter(Context context, int resource, SensorViewData[] data) {
+    public SensorDataAdapter(Context context, int resource, SensorData[] data) {
         super(context, resource, data);
         this.context = context;
         this.layoutResourceId = resource;
@@ -34,9 +34,8 @@ public class SensorAdapter extends ArrayAdapter<SensorViewData> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("###", "getView() just got called");
         View row = convertView;
-        SensorDetailHolder holder;
+        SensorDataHolder holder;
 
         // if not yet defined get the layout of the row
         if (row == null) {
@@ -45,7 +44,7 @@ public class SensorAdapter extends ArrayAdapter<SensorViewData> {
             row = inflater.inflate(layoutResourceId, parent, false);
 
             // initialize holder object (static class) for reuse later
-            holder = new SensorDetailHolder();
+            holder = new SensorDataHolder();
             holder.name = (TextView) row.findViewById(R.id.sensorViewName);
             holder.value = (TextView) row.findViewById(R.id.sensorViewValue);
             holder.unit = (TextView) row.findViewById(R.id.sensorViewUnit);
@@ -54,7 +53,7 @@ public class SensorAdapter extends ArrayAdapter<SensorViewData> {
             row.setTag(holder);
         } else {
             // just get the value which was saved in the view
-            holder = (SensorDetailHolder) row.getTag();
+            holder = (SensorDataHolder) row.getTag();
         }
 
         // set the actual texts
@@ -65,7 +64,7 @@ public class SensorAdapter extends ArrayAdapter<SensorViewData> {
         return row;
     }
 
-    static class SensorDetailHolder {
+    static class SensorDataHolder {
         TextView name;
         TextView value;
         TextView unit;
