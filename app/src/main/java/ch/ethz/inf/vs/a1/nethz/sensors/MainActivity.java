@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.Iterator;
@@ -52,13 +53,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3){
-                Intent i = new Intent(getApplicationContext(), SensorActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SensorActivity.class);
                 SensorWrapper temp = (SensorWrapper) adapter.getItemAtPosition(position);
-                i.putExtra("sensorType", temp.s.getType());
-                i.putExtra("hashCode", temp.s.hashCode());
-                startActivity(i);
+                intent.putExtra("sensorType", temp.s.getType());
+                intent.putExtra("hashCode", temp.s.hashCode());
+                startActivity(intent);
             }
 
+        });
+
+        // add a button to start the actuator activity
+        Button startActuator = (Button) findViewById(R.id.startActuatorButton);
+        startActuator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ActuatorsActivity.class);
+                startActivity(intent);
+            }
         });
 
     }

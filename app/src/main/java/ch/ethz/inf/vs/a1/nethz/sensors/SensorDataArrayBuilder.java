@@ -11,6 +11,7 @@ import android.hardware.Sensor;
  */
 
 public class SensorDataArrayBuilder {
+    // todo: do this in a nice way using string.xml
 
     public SensorData[] getSensorData(int sensorType) {
         SensorData[] res;
