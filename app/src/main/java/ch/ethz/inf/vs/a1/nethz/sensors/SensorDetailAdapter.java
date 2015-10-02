@@ -52,8 +52,8 @@ public class SensorDetailAdapter extends ArrayAdapter<SensorDetail> {
         }
 
         // set the actual texts
-        holder.name.setText(data[position].name + ":");
-        holder.detail.setText("" + data[position].detail);
+        holder.name.setText(data[position].name);
+        holder.detail.setText(data[position].detail);
 
         return row;
     }

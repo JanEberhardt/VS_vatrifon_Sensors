@@ -110,12 +110,14 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     }
 
     private SensorDetail[] getDetails(){
-        SensorDetail[] res = new SensorDetail[3];
-        res[0] = new SensorDetail("Name", sensor.getName());
-        res[1] = new SensorDetail("Vendor", sensor.getVendor());
-        res[2] = new SensorDetail("Power consumption", sensor.getPower()+" mA");
-        // todo: add other stuff...
-
+        SensorDetail[] res = new SensorDetail[6];
+        res[0] = new SensorDetail(R.string.sensor_name, sensor.getName());
+        res[1] = new SensorDetail(R.string.sensor_vendor, sensor.getVendor());
+        res[3] = new SensorDetail(R.string.sensor_version, sensor.getVersion()+"");
+        res[2] = new SensorDetail(R.string.sensor_power, sensor.getPower()+" mA");
+        res[3] = new SensorDetail(R.string.sensor_min_delay, sensor.getMinDelay()+" ms");
+        res[4] = new SensorDetail(R.string.sensor_max_range, sensor.getMaximumRange()+"");
+        res[5] = new SensorDetail(R.string.sensor_resolution, sensor.getResolution()+"");
         return res;
     }
 }

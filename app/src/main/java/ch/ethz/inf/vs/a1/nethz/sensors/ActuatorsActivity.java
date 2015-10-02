@@ -82,6 +82,15 @@ public class ActuatorsActivity extends AppCompatActivity {
     }
 
     private void initPlayer(boolean loop){
+
+        // if we don't do this, are in a loop and switch to once mode in the settings
+        // the "I can't hear anything" guy doesn't stop!
+        if(mp != null){
+            mp.stop();
+            Button soundButton = (Button) findViewById(R.id.play_sound);
+            soundButton.setText(R.string.actuators_sound_start);
+        }
+
         int sound;
         if(loop)
             sound = R.raw.loop;

@@ -6,10 +6,10 @@ package ch.ethz.inf.vs.a1.nethz.sensors;
  * Stores one detail about the sensor.
  */
 public class SensorDetail {
-    public String name;
+    public int name;
     public String detail;
 
-    public SensorDetail(String name, String detail) {
+    public SensorDetail(int name, String detail) {
         this.name = name;
         this.detail = detail;
     }

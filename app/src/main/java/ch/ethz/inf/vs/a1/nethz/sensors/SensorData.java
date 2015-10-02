@@ -7,13 +7,13 @@ package ch.ethz.inf.vs.a1.nethz.sensors;
  */
 
 public class SensorData {
-    public String name;
+    public int name;
     public float value;
-    public String unit;
+    public int unit;
 
-    public SensorData(String n, float v, String u) {
-        this.name = n;
-        this.value = v;
-        this.unit = u;
+    public SensorData(int name, float value, int unit) {
+        this.name = name;
+        this.value = value;
+        this.unit = unit;
     }
 }

@@ -57,7 +57,7 @@ public class SensorDataAdapter extends ArrayAdapter<SensorData> {
         }
 
         // set the actual texts
-        holder.name.setText(data[position].name+":");
+        holder.name.setText(data[position].name);
         holder.value.setText("" + data[position].value);
         holder.unit.setText(data[position].unit);
 
