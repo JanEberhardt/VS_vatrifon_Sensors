@@ -93,7 +93,7 @@ public class SensorDataArrayBuilder {
                 break;
             // default case, just print the sensor readings...
             default:
-                res = new SensorData[1];
+                res = new SensorData[3];
                 res[0] = new SensorData(R.string.sensor_undefined, 0, R.string.sensor_no_unit);
                 res[1] = new SensorData(R.string.sensor_undefined, 0, R.string.sensor_no_unit);
                 res[2] = new SensorData(R.string.sensor_undefined, 0, R.string.sensor_no_unit);
