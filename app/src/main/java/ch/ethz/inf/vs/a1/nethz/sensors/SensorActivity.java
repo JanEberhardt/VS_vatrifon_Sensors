@@ -6,6 +6,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -85,10 +86,15 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        for (int i = 0; i < sensorData.length; i++) {
-            sensorData[i].value = event.values[i];
+        try {
+            for (int i = 0; i < sensorData.length; i++) {
+                sensorData[i].value = event.values[i];
+            }
+            dataAdapter.notifyDataSetChanged();
         }
-        dataAdapter.notifyDataSetChanged();
+        catch (Exception e){
+            Log.d("###", e.toString());
+        }
 
     }
 
