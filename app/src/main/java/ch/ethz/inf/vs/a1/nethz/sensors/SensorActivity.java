@@ -86,16 +86,10 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        try {
-            for (int i = 0; i < sensorData.length; i++) {
-                sensorData[i].value = event.values[i];
-            }
-            dataAdapter.notifyDataSetChanged();
+        for (int i = 0; i < event.values.length; i++) {
+            sensorData[i].value = event.values[i];
         }
-        catch (Exception e){
-            Log.d("###", e.toString());
-        }
-
+        dataAdapter.notifyDataSetChanged();
     }
 
     @Override
