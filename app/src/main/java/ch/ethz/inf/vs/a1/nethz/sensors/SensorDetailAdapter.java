@@ -2,7 +2,6 @@ package ch.ethz.inf.vs.a1.nethz.sensors;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ public class SensorDetailAdapter extends ArrayAdapter<SensorDetail> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("###", "getView() just got called");
         View row = convertView;
         SensorDetailHolder holder;
 
